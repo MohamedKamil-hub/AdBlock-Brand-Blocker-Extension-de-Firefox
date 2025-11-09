@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sitio Bloqueado</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    
+    .icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    .url-box {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+    
+    .btn-secondary:hover {
+      background: #d0d0d0;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">🚫</div>
+    <h1>Sitio Bloqueado</h1>
+    <p>Esta página ha sido bloqueada por tu extensión AdBlock & Brand Blocker.</p>
+    <p>El dominio está en tu lista de marcas bloqueadas.</p>
+    
+    <div class="url-box" id="blockedUrl"></div>
+    
+    <div class="buttons">
+      <button class="btn-primary" id="goBackBtn">← Volver Atrás</button>
+      <button class="btn-secondary" id="openSettingsBtn">⚙️ Configuración</button>
+    </div>
+  </div>
+  
+  <script>
+    // Obtener URL bloqueada de los parámetros
+    const params = new URLSearchParams(window.location.search);
+    const blockedUrl = params.get('url');
+    
+    if (blockedUrl) {
+      document.getElementById('blockedUrl').textContent = decodeURIComponent(blockedUrl);
+    }
+    
+    // Botón volver atrás
+    document.getElementById('goBackBtn').addEventListener('click', () => {
+      window.history.back();
+    });
+    
+    // Botón abrir configuración
+    document.getElementById('openSettingsBtn').addEventListener('click', () => {
+      browser.runtime.openOptionsPage();
+    });
+  </script>
+</body>
+</html>
