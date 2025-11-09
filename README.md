@@ -1,0 +1,1 @@
+# AdBlock-Brand-Blocker---Extensi-n-de-Firefox
